@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getAllProducts } from "@/lib/shopify";
+import ProductPrice from "@/components/ProductPrice";
 import siteConfig from "@/data/siteConfig";
 
 export default async function CollectionPage() {
@@ -130,7 +131,10 @@ export default async function CollectionPage() {
                     </p>
                   </div>
 
-                  <strong>PKR {product.price.toLocaleString()}</strong>
+                  <ProductPrice
+                    price={product.price}
+                    compareAtPrice={product.compareAtPrice}
+                  />
                 </div>
 
                 <Link

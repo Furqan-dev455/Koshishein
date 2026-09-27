@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getAllProducts } from "@/lib/shopify";
+import ProductPrice from "@/components/ProductPrice";
 
 export default async function FeaturedProducts() {
   const products = await getAllProducts();
@@ -53,7 +54,10 @@ export default async function FeaturedProducts() {
                   </p>
                 </div>
 
-                <strong>PKR {product.price.toLocaleString()}</strong>
+                <ProductPrice
+                  price={product.price}
+                  compareAtPrice={product.compareAtPrice}
+                />
               </div>
 
               <Link

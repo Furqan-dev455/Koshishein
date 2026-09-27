@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { getAllProducts } from "@/lib/shopify";
 import ProductGallery from "@/components/ProductGallery";
+import ProductPrice from "@/components/ProductPrice";
 import siteConfig from "@/data/siteConfig";
 
 type CatalogPageProps = {
@@ -63,9 +64,11 @@ export default async function CatalogPage({
 
                 <h2>{selectedProduct.title}</h2>
 
-                <strong className="catalog-product-price">
-                  PKR {selectedProduct.price.toLocaleString()}
-                </strong>
+                <ProductPrice
+                  className="catalog-product-price"
+                  price={selectedProduct.price}
+                  compareAtPrice={selectedProduct.compareAtPrice}
+                />
 
                 <p className="catalog-product-description">
                   {selectedProduct.description}
@@ -138,9 +141,10 @@ export default async function CatalogPage({
                       <p>{product.description.slice(0, 140)}{product.description.length > 140 ? "…" : ""}</p>
                     </div>
 
-                    <strong>
-                      PKR {product.price.toLocaleString()}
-                    </strong>
+                    <ProductPrice
+                      price={product.price}
+                      compareAtPrice={product.compareAtPrice}
+                    />
                   </div>
 
                   <Link

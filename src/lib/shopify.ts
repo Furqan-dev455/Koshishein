@@ -16,6 +16,7 @@ export type ShopifyProduct = {
   imageAlt: string;
   images: ShopifyImage[];
   price: number;
+  compareAtPrice: number | null;
   currencyCode: string;
   variantId: string;
   availableForSale: boolean;
@@ -34,6 +35,9 @@ type ProductsQueryResponse = {
           edges: { node: { url: string; altText: string | null } }[];
         };
         priceRange: {
+          minVariantPrice: { amount: string; currencyCode: string };
+        };
+        compareAtPriceRange: {
           minVariantPrice: { amount: string; currencyCode: string };
         };
         variants: {
@@ -111,6 +115,12 @@ export async function getAllProducts(): Promise<ShopifyProduct[]> {
               currencyCode
             }
           }
+          compareAtPriceRange {
+            minVariantPrice {
+              amount
+              currencyCode
+            }
+          }
           variants(first: 1) {
             edges {
               node {
@@ -130,6 +140,10 @@ export async function getAllProducts(): Promise<ShopifyProduct[]> {
       alt: img.altText ?? node.title,
     }));
     const variant = node.variants.edges[0]?.node;
+    const price = Number(node.priceRange.minVariantPrice.amount);
+    const compareAtPrice = Number(
+      node.compareAtPriceRange.minVariantPrice.amount
+    );
 
     return {
       id: node.id,
@@ -139,7 +153,8 @@ export async function getAllProducts(): Promise<ShopifyProduct[]> {
       image: node.featuredImage?.url ?? images[0]?.url ?? "",
       imageAlt: node.featuredImage?.altText ?? node.title,
       images: images.length > 0 ? images : [],
-      price: Number(node.priceRange.minVariantPrice.amount),
+      price,
+      compareAtPrice: compareAtPrice > price ? compareAtPrice : null,
       currencyCode: node.priceRange.minVariantPrice.currencyCode,
       variantId: variant?.id ?? "",
       availableForSale: variant?.availableForSale ?? false,
