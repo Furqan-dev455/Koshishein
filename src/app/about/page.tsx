@@ -41,14 +41,14 @@ export default function AboutPage() {
 
               <p>
                 Koshishein is built around a simple idea: a good watch should
-                feel personal. From the case you choose to the final
-                engraving, every detail deserves attention.
+                feel personal. From the case to the strap, every detail
+                deserves attention.
               </p>
 
               <p>
-                We offer custom engraving alongside carefully selected
-                ready-to-wear designs, giving our customers the freedom to
-                choose what suits their style and everyday needs.
+                We offer carefully selected signature and everyday designs,
+                giving our customers the freedom to choose what suits their
+                style and everyday needs.
               </p>
             </div>
           </div>
@@ -63,39 +63,20 @@ export default function AboutPage() {
               <p className="section-eyebrow">WHAT WE DO</p>
 
               <h2>
-                From your watch
-                <span>to the final engraving.</span>
+                Watches chosen
+                <span>for every wrist.</span>
               </h2>
             </div>
 
             <p>
-              Whether you bring your own watch or choose from our
-              collections, we focus on creating pieces with a clean finish
-              and timeless appeal.
+              From signature pieces to everyday classics, we focus on watches
+              with a clean finish and timeless appeal.
             </p>
           </div>
 
           <div className="about-services-grid">
             <article className="about-service-card">
               <span className="about-service-number">01</span>
-
-              <div>
-                <h3>Engraving & Personalization</h3>
-
-                <p>
-                  Bring your watch and preferred design. Our team turns it
-                  into a carefully finished, personal keepsake.
-                </p>
-
-                <Link href="/collection" className="service-link">
-                  Learn More
-                  <span>→</span>
-                </Link>
-              </div>
-            </article>
-
-            <article className="about-service-card">
-              <span className="about-service-number">02</span>
 
               <div>
                 <h3>Signature Collection</h3>
@@ -113,7 +94,7 @@ export default function AboutPage() {
             </article>
 
             <article className="about-service-card">
-              <span className="about-service-number">03</span>
+              <span className="about-service-number">02</span>
 
               <div>
                 <h3>Everyday Classics</h3>
@@ -163,7 +144,7 @@ export default function AboutPage() {
               <h3>Craftsmanship</h3>
 
               <p>
-                Good engraving is more than marking a surface. It is about
+                A great watch is more than telling time. It is about
                 precision, finishing, and attention to detail.
               </p>
             </article>
@@ -202,8 +183,8 @@ export default function AboutPage() {
               </p>
 
               <p>
-                That attention to detail is what connects our engraving
-                service with our signature and everyday collections.
+                That attention to detail is what connects our signature and
+                everyday collections.
               </p>
             </div>
 
@@ -230,8 +211,7 @@ export default function AboutPage() {
           </h2>
 
           <p>
-            Explore our signature designs, everyday classics, and custom
-            engraving service.
+            Explore our signature designs and everyday classics.
           </p>
 
           <Link href="/collection" className="primary-button">

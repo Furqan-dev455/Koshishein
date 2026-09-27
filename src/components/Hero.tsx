@@ -16,21 +16,20 @@ export default function Hero() {
           </h1>
 
           <p className="hero-description">
-            Explore our signature and everyday collections, or send us your
-            own watch for custom engraving and personalization.
+            Explore our signature and everyday collections.
           </p>
 
           <div className="hero-actions">
-            <a
+            {/* <a
               href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(
-                "Assalamualaikum, I want to order a watch."
+                "Hi Koshishein! I'd like to place an order."
               )}`}
               target="_blank"
               rel="noopener noreferrer"
               className="button button-primary"
             >
               Order on WhatsApp
-            </a>
+            </a> */}
 
             <Link href="/collection" className="button button-secondary">
               Explore Collection

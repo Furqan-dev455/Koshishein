@@ -1,12 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  signatureCollection,
-  everydayClassics,
-} from "@/data/collection";
+import { getAllProducts } from "@/lib/shopify";
 import siteConfig from "@/data/siteConfig";
 
-export default function CollectionPage() {
+export default async function CollectionPage() {
+  const products = await getAllProducts();
+
   return (
     <main>
       {/* Page Banner */}
@@ -15,14 +14,13 @@ export default function CollectionPage() {
           <p className="section-eyebrow">KOSHISHEIN</p>
           <h1>Our Collections</h1>
           <p>
-            Discover our custom engraving service, signature designs, and
-            everyday classic watches.
+            Discover our signature designs and everyday classic watches.
           </p>
         </div>
       </section>
 
       {/* Custom Engraving */}
-      <section className="collection-section custom-stitching-section">
+      {/* <section className="collection-section custom-stitching-section">
         <div className="container">
           <div className="collection-intro">
             <div>
@@ -44,7 +42,7 @@ export default function CollectionPage() {
                 Delivery charges are separate.
               </p>
 
-              <Link
+              <a
                 href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(
                   "Assalamualaikum, I want to book custom engraving."
                 )}`}
@@ -53,70 +51,71 @@ export default function CollectionPage() {
                 rel="noopener noreferrer"
               >
                 Book Your Engraving
-              </Link>
+              </a>
             </div>
           </div>
-
+          
           <div className="stitching-gallery">
-  <div className="stitching-gallery-main">
-    <Image
-      src="/images/products/executive-steel-elite.jpg"
-      alt="Custom engraving sample"
-      fill
-      sizes="(max-width: 768px) 100vw, 50vw"
-    />
-  </div>
+            <div className="stitching-gallery-main">
+              <Image
+                src="/images/engraving/engraving-sample-cartier.jpg"
+                alt="Koshishein watch with engraving-ready packaging"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
 
-  <div className="stitching-gallery-medium">
-    <Image
-      src="/images/products/minimalist-canvas-black.jpg"
-      alt="Custom engraving sample"
-      fill
-      sizes="(max-width: 768px) 50vw, 30vw"
-    />
-  </div>
+            <div className="stitching-gallery-medium">
+              <Image
+                src="/images/engraving/engraving-sample-skmei.jpg"
+                alt="Koshishein watch in gift box"
+                fill
+                sizes="(max-width: 768px) 50vw, 30vw"
+              />
+            </div>
 
-  <div className="stitching-gallery-small">
-    <Image
-      src="/images/products/trail-leather-tan.jpg"
-      alt="Custom engraving sample"
-      fill
-      sizes="(max-width: 768px) 50vw, 20vw"
-    />
-  </div>
-</div>
+            <div className="stitching-gallery-small">
+              <Image
+                src="/images/engraving/engraving-sample-aura.jpg"
+                alt="Koshishein watch in gift box"
+                fill
+                sizes="(max-width: 768px) 50vw, 20vw"
+              />
+            </div>
+            
+          </div>
         </div>
-      </section>
+      </section> */}
 
-      {/* Signature Collection */}
+      {/* Watches */}
       <section className="collection-section handmade-section">
         <div className="container">
           <div className="collection-heading">
             <div>
-              <p className="section-eyebrow">KOSHISHEIN SIGNATURE</p>
+              {/* <p className="section-eyebrow">KOSHISHEIN WATCHES</p> */}
 
-              <h2>
-                Signature designs
+              {/* <h2>
+                Designs
                 <span>built for distinction.</span>
-              </h2>
+              </h2> */}
             </div>
 
-            <p>
-              Explore our premium signature watches, created for customers
-              who appreciate elegant details and timeless style.
-            </p>
+            {/* <p>
+              Explore our current watches, created for customers who
+              appreciate elegant details and timeless style.
+            </p> */}
           </div>
 
           <div className="collection-product-grid">
-            {signatureCollection.map((product) => (
+            {products.map((product) => (
               <article className="collection-product-card" key={product.id}>
                 <Link
-                  href={`/catalog?product=${product.id}`}
+                  href={`/catalog?product=${product.handle}`}
                   className="collection-product-image"
                 >
                   <Image
                     src={product.image}
-                    alt={product.name}
+                    alt={product.imageAlt}
                     fill
                     sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
                   />
@@ -124,71 +123,18 @@ export default function CollectionPage() {
 
                 <div className="collection-product-info">
                   <div>
-                    <h3>{product.name}</h3>
-                    <p>{product.description}</p>
+                    <h3>{product.title}</h3>
+                    <p>
+                      {product.description.slice(0, 140)}
+                      {product.description.length > 140 ? "…" : ""}
+                    </p>
                   </div>
 
                   <strong>PKR {product.price.toLocaleString()}</strong>
                 </div>
 
                 <Link
-                  href={`/catalog?product=${product.id}`}
-                  className="product-order-link"
-                >
-                  View & Order
-                  <span>→</span>
-                </Link>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Everyday Classics */}
-      <section className="collection-section plain-section">
-        <div className="container">
-          <div className="collection-heading">
-            <div>
-              <p className="section-eyebrow">EVERYDAY CLASSICS</p>
-
-              <h2>
-                Simple.
-                <span>Elegant. Everyday.</span>
-              </h2>
-            </div>
-
-            <p>
-              Comfortable everyday watches designed for daily use, with the
-              neat finishing Koshishein is known for.
-            </p>
-          </div>
-
-          <div className="collection-product-grid">
-            {everydayClassics.map((product) => (
-              <article className="collection-product-card" key={product.id}>
-                <Link
-                  href={`/catalog?product=${product.id}`}
-                  className="collection-product-image"
-                >
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
-                  />
-                </Link>
-
-                <div className="collection-product-info">
-                  <div>
-                    <h3>{product.name}</h3>
-                    <p>{product.description}</p>
-                  </div>
-
-                  <strong>PKR {product.price.toLocaleString()}</strong>
-                </div>
-
-                <Link
-                  href={`/catalog?product=${product.id}`}
+                  href={`/catalog?product=${product.handle}`}
                   className="product-order-link"
                 >
                   View & Order

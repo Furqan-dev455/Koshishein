@@ -1,18 +1,15 @@
 import Hero from "@/components/Hero";
+import FeaturedProducts from "@/components/FeaturedProducts";
 import AboutSnippet from "@/components/AboutSnippet";
 import Services from "@/components/Services";
-import HowItWorks from "@/components/HowItWorks";
-
-
 
 export default function HomePage() {
   return (
     <main>
       <Hero />
+      <FeaturedProducts />
       <AboutSnippet />
       <Services />
-        <HowItWorks />
-        
     </main>
   );
 }

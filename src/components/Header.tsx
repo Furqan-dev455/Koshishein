@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import BrandLogo from "@/components/BrandLogo";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 import siteConfig from "@/data/siteConfig";
 
 export default function Header() {
@@ -31,8 +32,9 @@ export default function Header() {
           target="_blank"
           rel="noopener noreferrer"
           className="header-whatsapp"
+          aria-label="Contact on WhatsApp"
         >
-          WhatsApp
+          <WhatsAppIcon size={22} />
         </a>
 
         <button
@@ -71,7 +73,9 @@ export default function Header() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={closeMenu}
+            className="mobile-nav-whatsapp"
           >
+            <WhatsAppIcon size={16} />
             Order on WhatsApp
           </a>
         </nav>

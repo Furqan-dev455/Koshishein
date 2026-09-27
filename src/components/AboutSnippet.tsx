@@ -28,10 +28,10 @@ export default function AboutSnippet() {
             classics, every watch is chosen for its craftsmanship and character.
           </p>
 
-          <p>
+{/* <p>
             Send us your own watch for engraving, or choose from our
             collection with personalization available on every piece.
-          </p>
+          </p>           */}
 
           <Link href="/about" className="text-link">
             Read Our Story

@@ -3,20 +3,13 @@ import Link from "next/link";
 const services = [
   {
     number: "01",
-    title: "Engraving & Personalization",
-    description:
-      "Send us your own watch and we will engrave it with the design or text you choose, with careful, precise finishing.",
-    price: "Custom engraving",
-  },
-  {
-    number: "02",
     title: "Signature Collection",
     description:
       "Explore our premium signature designs, chosen for customers who love a distinctive, refined watch.",
     price: "Unique premium designs",
   },
   {
-    number: "03",
+    number: "02",
     title: "Everyday Classics",
     description:
       "Simple, elegant and comfortable watches designed for everyday wear.",
@@ -39,10 +32,10 @@ export default function Services() {
             </h2>
           </div>
 
-          <p>
+          {/* <p>
             From engraving your own watch to ready-to-wear designs, Koshishein
             brings timeless craftsmanship and simple elegance together.
-          </p>
+          </p> */}
         </div>
 
         {/* Service cards */}

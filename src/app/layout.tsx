@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Koshishein — Timeless Watches",
   description:
-    "Signature and everyday watches, plus custom engraving and personalization. Order on WhatsApp, delivered across Pakistan.",
+    "Signature and everyday watches. Order on WhatsApp, delivered across Pakistan.",
 };
 
 export default function RootLayout({

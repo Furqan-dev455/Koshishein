@@ -5,14 +5,16 @@ const siteConfig = {
 
   whatsappNumber: "923298910011",
 
-  location: "Khayaban Colony 2,Faisalabad, Pakistan",
+  location: "Green Avenue, Faisalabad, Pakistan",
 
-  email: "takhlaq0@gmail.com",
+  email: "hello@koshishein.com",
 
   instagramUrl:
     "https://www.instagram.com/koshishein1?stkn=eDhkazcycjdkNHpz&utm_source=qr",
 
   facebookUrl: "https://www.facebook.com/share/1CYQyve6Hn/?mibextid=wwXIfr",
+
+  tiktokUrl: "https://www.tiktok.com/@koshishein",
 };
 
 export default siteConfig;

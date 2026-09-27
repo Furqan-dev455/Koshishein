@@ -1,10 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import {
-  signatureCollection,
-  everydayClassics,
-} from "@/data/collection";
+import { getAllProducts } from "@/lib/shopify";
+import ProductGallery from "@/components/ProductGallery";
 import siteConfig from "@/data/siteConfig";
 
 type CatalogPageProps = {
@@ -19,13 +17,10 @@ export default async function CatalogPage({
   const params = await searchParams;
   const selectedProductId = params.product;
 
-  const products = [
-    ...signatureCollection,
-    ...everydayClassics,
-  ];
+  const products = await getAllProducts();
 
   const selectedProduct = selectedProductId
-    ? products.find((product) => String(product.id) === selectedProductId)
+    ? products.find((product) => product.handle === selectedProductId)
     : null;
 
   return (
@@ -54,20 +49,19 @@ export default async function CatalogPage({
             </Link>
 
             <div className="catalog-product-detail">
-              <div className="catalog-product-image">
-                <Image
-                  src={selectedProduct.image}
-                  alt={selectedProduct.name}
-                  fill
-                  priority
-                  sizes="(max-width: 900px) 100vw, 55vw"
-                />
-              </div>
+              <ProductGallery
+                images={
+                  selectedProduct.images.length > 0
+                    ? selectedProduct.images
+                    : [{ url: selectedProduct.image, alt: selectedProduct.imageAlt }]
+                }
+                title={selectedProduct.title}
+              />
 
               <div className="catalog-product-content">
                 <p className="section-eyebrow">KOSHISHEIN</p>
 
-                <h2>{selectedProduct.name}</h2>
+                <h2>{selectedProduct.title}</h2>
 
                 <strong className="catalog-product-price">
                   PKR {selectedProduct.price.toLocaleString()}
@@ -77,25 +71,27 @@ export default async function CatalogPage({
                   {selectedProduct.description}
                 </p>
 
+                <div className="catalog-product-actions">
+                  <a
+                    href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(
+                      `Assalamualaikum, I would like to order ${selectedProduct.title}.`
+                    )}`}
+                    className="primary-button"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Order on WhatsApp
+                  </a>
+                </div>
+
                 <div className="catalog-product-note">
                   <strong>Ordering Information</strong>
 
                   <p>
-                    Contact us on WhatsApp to confirm availability, sizing,
-                    delivery details, and your order.
+                    Tap &ldquo;Order on WhatsApp&rdquo; to place your order. For
+                    sizing or delivery questions, message us on WhatsApp anytime.
                   </p>
                 </div>
-
-                <Link
-                  href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(
-                    `Assalamualaikum, I want to order ${selectedProduct.name}. Price: PKR ${selectedProduct.price.toLocaleString()}`
-                  )}`}
-                  className="primary-button"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Order on WhatsApp
-                </Link>
               </div>
             </div>
           </div>
@@ -124,12 +120,12 @@ export default async function CatalogPage({
               {products.map((product) => (
                 <article className="catalog-card" key={product.id}>
                   <Link
-                    href={`/catalog?product=${product.id}`}
+                    href={`/catalog?product=${product.handle}`}
                     className="catalog-card-image"
                   >
                     <Image
                       src={product.image}
-                      alt={product.name}
+                      alt={product.imageAlt}
                       fill
                       sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
                     />
@@ -137,9 +133,9 @@ export default async function CatalogPage({
 
                   <div className="catalog-card-info">
                     <div>
-                      <h3>{product.name}</h3>
+                      <h3>{product.title}</h3>
 
-                      <p>{product.description}</p>
+                      <p>{product.description.slice(0, 140)}{product.description.length > 140 ? "…" : ""}</p>
                     </div>
 
                     <strong>
@@ -148,7 +144,7 @@ export default async function CatalogPage({
                   </div>
 
                   <Link
-                    href={`/catalog?product=${product.id}`}
+                    href={`/catalog?product=${product.handle}`}
                     className="catalog-card-link"
                   >
                     View Details
@@ -162,7 +158,7 @@ export default async function CatalogPage({
       )}
 
       {/* Custom Engraving CTA */}
-      <section className="catalog-stitching-cta">
+      {/* <section className="catalog-stitching-cta">
         <div className="container">
           <p className="section-eyebrow">CUSTOM ENGRAVING</p>
 
@@ -180,7 +176,7 @@ export default async function CatalogPage({
             Explore Custom Engraving
           </Link>
         </div>
-      </section>
+      </section> */}
     </main>
   );
 }
